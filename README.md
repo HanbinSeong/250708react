@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Git Action
+Git Action으로 AWS서버에 CI/CD구조를 가지는 플로우를 이해하기 위해 실습하는 리포지토리
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 환경변수
+ECR_REPOSITORY          = Amazon ECR/프라이빗 레지스트리/리포지토리 이름 (e.g. my-react-app)
+EC2_HOST                = EC2 인스턴스 퍼블릭 DNS
+EC2_USER                = 인스턴스 유저 이름(e.g. ubuntu)
+EC2_KEY                 = 인스턴스 시작할 때, 키 페어(로그인) (e.g. aws-sever-key.pem 내부내용)
+AWS_ACCESS_KEY_ID       = IAM/사용자/본인/액세스키
+AWS_SECRET_ACCESS_KEY   = IAM/사용자/본인/비밀 액세스 키
+AWS_REGION              = AWS 서버 지역(e.g. ap-northeast-3)
 
-## Available Scripts
+## 서버 SSH 연결안될 경우
+```
+    # PowerShell에서 파일을 읽기 전용으로 설정
+    attrib +R your-key.pem
+    
+    # GitBash 
+    chmod 400 your-key.pem
 
-In the project directory, you can run:
+```
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## S3 - (main.yml)
+정적 웹 사이트 호스팅
+## EC2 - (docker.yml)
+하나의 컴퓨터 객체(서버 운영)
+Docker 활용 가능 > Amazon ECR/프라이빗 레지스트리 (이미지 저장)
+보안그룹 인바운드 규칙 필요
+- SSH
+  - 유형: SSH
+  - 소스: Anywhere IPv4
+- HTTP
+  - 유형: 사용자 지정 TCP
+  - 포트범위: 사용포트번호
+  - 소스: Anywhere IPv4
