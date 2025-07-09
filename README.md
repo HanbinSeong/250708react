@@ -1,3 +1,10 @@
+# 실습목차
+- [2025-07-08](#250709 - Git Action 실습)
+- [2025-07-09](#250709 - 젠킨스 실습)
+
+---
+
+# 250708 - Git Action 실습
 # Git Action
 Git Action으로 AWS서버에 CI/CD구조를 가지는 플로우를 이해하기 위해 실습하는 리포지토리
 
@@ -53,3 +60,39 @@ Docker 활용 가능 > Amazon ECR/프라이빗 레지스트리 (이미지 저장
 # 서버규모
 - 개인: EC2 하나로 프론트 백엔드 DB 전부 해결가능 + ECR(Docker 이미지)
 - 운영규모: 규모에 따라 다르지만, 보통 S3(웹작동방식이나, 트래픽 많아지면 별도 서버 구성), ECS, RDS 각각 서버운영
+
+---
+
+# 250709 - 젠킨스 실습
+react환경 및 fastapi를 하나의 EC2(우분트 t2.medium) 환경에서 세팅할거임.
+
+## EC2 초기 프로그램 설치
+```SSH
+# Jenkins
+sudo apt update
+sudo apt install openjdk-17-jdk -y
+wget -q -O - https://pkg.jenkins.io/debian/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb https://pkg.jenkins.io/debian binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update && sudo apt install jenkins -y
+sudo systemctl start jenkins
+sudo systemctl enable jenkins
+
+# Docker
+sudo apt install docker.io -y
+sudo systemctl enable docker
+sudo apt install -y docker.io
+sudo systemctl enable docker
+sudo systemctl start docker
+sudo usermod -aG docker $USER
+```
+
+### 젠킨스 KEY값 확인
+```
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
+
+### 웹상에서 젠킨스 설치
+1. `{퍼블릭DNS}:8080` 접속
+2. 시크릿 키 입력
+3. 권장설치옵션
+4. `admin` 계정 설정
