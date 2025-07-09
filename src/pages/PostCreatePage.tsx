@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Post } from "../types/post";
 import axios from "axios";
 
-const API_BASE_URL = "http://ec2-15-168-189-102.ap-northeast-3.compute.amazonaws.com:8000/"
+const API_BASE_URL = "http://ec2-15-168-189-102.ap-northeast-3.compute.amazonaws.com:8000"
 
 interface PostCreatePageProps {
   posts: Post[];

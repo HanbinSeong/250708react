@@ -8,7 +8,7 @@ import axios from "axios";
 
 function App() {
   const [posts, setPosts] = useState<Post[]>([]);
-  const API_BASE_URL = "http://ec2-15-168-189-102.ap-northeast-3.compute.amazonaws.com:8000/"
+  const API_BASE_URL = "http://ec2-15-168-189-102.ap-northeast-3.compute.amazonaws.com:8000"
   useEffect(() => {
     (async () => {
       console.log("Fetching data...");
