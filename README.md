@@ -12,6 +12,7 @@ Git Action으로 AWS서버에 CI/CD구조를 가지는 플로우를 이해하기
 `.github/workflows` 디렉토리에 .yml 파일로 스크립트로 자동화 실행
 
 ## 환경변수
+```
 ECR_REPOSITORY          = Amazon ECR/프라이빗 레지스트리/리포지토리 이름 (e.g. my-react-app)
 EC2_HOST                = EC2 인스턴스 퍼블릭 DNS
 EC2_USER                = 인스턴스 유저 이름(e.g. ubuntu)
@@ -19,6 +20,7 @@ EC2_KEY                 = 인스턴스 시작할 때, 키 페어(로그인) (e.g
 AWS_ACCESS_KEY_ID       = IAM/사용자/본인/액세스키
 AWS_SECRET_ACCESS_KEY   = IAM/사용자/본인/비밀 액세스 키
 AWS_REGION              = AWS 서버 지역(e.g. ap-northeast-3)
+```
 
 # EC2 서버 초기셋팅(Docker)
 - SSH 접속
